@@ -1,0 +1,57 @@
+{
+  "name": "@currency-one/form-utils",
+  "version": "0.0.1",
+  "description": "Form utils",
+  "keywords": [
+    "form-utils",
+    "form",
+    "utils"
+  ],
+  "homepage": "https://github.com/Currency-One/form-utils",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Currency-One/form-fields.git"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "all": "npm install && npm run lint && npm run test && npm run build",
+    "build": "npm run clean && npm run tsc",
+    "tsc": "tsc",
+    "lint": "tslint -p . -t codeFrame",
+    "test": "jest --coverage",
+    "clean": "rimraf ./dist",
+    "publish-package": "npm run all && npm version patch && npm publish"
+  },
+  "peerDependencies": {},
+  "devDependencies": {
+    "@types/jest": "^24.0.25",
+    "jest": "^24.9.0",
+    "rimraf": "^3.0.0",
+    "ts-jest": "^24.2.0",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.4"
+  },
+  "author": "Damian Majsner <d.majsner@gmail.com>",
+  "license": "MIT",
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "jsdom",
+    "testMatch": [
+      "**/__tests__/**/*.+(ts|tsx|js)",
+      "**/?(*.)+(spec|test).+(ts|tsx|js)"
+    ],
+    "collectCoverageFrom": [
+      "lib/**/*.{ts,tsx}",
+      "!**/node_modules/**"
+    ]
+  },
+  "bugs": {
+    "url": "https://github.com/Currency-One/form-fields/issues"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "dependencies": {}
+}
