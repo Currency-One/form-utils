@@ -1,4 +1,7 @@
 # form-utils
+
+[![npm version](https://img.shields.io/npm/v/@currency-one/form-utils.svg)](https://www.npmjs.com/package/@currency-one/form-utils)
+
 Typescript form utilities
 
 ### Models:

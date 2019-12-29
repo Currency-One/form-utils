@@ -10,7 +10,7 @@
   "homepage": "https://github.com/Currency-One/form-utils",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Currency-One/form-fields.git"
+    "url": "git+https://github.com/Currency-One/form-utils.git"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -21,7 +21,7 @@
     "lint": "tslint -p . -t codeFrame",
     "test": "jest --coverage",
     "clean": "rimraf ./dist",
-    "publish-package": "npm run all && npm version patch && npm publish"
+    "publish-package": "npm run all && npm version patch && npm publish --access public"
   },
   "peerDependencies": {},
   "devDependencies": {
@@ -47,7 +47,7 @@
     ]
   },
   "bugs": {
-    "url": "https://github.com/Currency-One/form-fields/issues"
+    "url": "https://github.com/Currency-One/form-utils/issues"
   },
   "directories": {
     "lib": "lib",
