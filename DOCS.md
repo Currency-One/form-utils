@@ -2,19 +2,19 @@
 
 <dl>
 <dt><a href="#isFormField">isFormField(field)</a> ⇒ <code>boolean</code></dt>
-<dd><p>Indicates if param is FormField object.</p></dd>
+<dd><p>Indicates if passed param is FormField object.</p></dd>
 <dt><a href="#createFormField">createFormField(val, [validators], [noValidate])</a> ⇒ <code>FormField</code></dt>
 <dd><p>Creates FormField object.</p></dd>
 <dt><a href="#createPasswordFormField">createPasswordFormField(val, [validators], [noValidate])</a> ⇒ <code>PwdField</code></dt>
 <dd><p>Creates PwdField object.</p></dd>
 <dt><a href="#formFieldsToValues">formFieldsToValues(form)</a> ⇒ <code>Object</code></dt>
-<dd><p>Strips form with FormFields into object with values.</p></dd>
+<dd><p>Converts all FormFields in passed object into {[key]: value}</p></dd>
 <dt><a href="#setNoValidate">setNoValidate(key, field)</a> ⇒ <code>FormField</code></dt>
 <dd><p>Toggles noValidate on FormField.</p></dd>
-<dt><a href="#changeFormFieldsValidation">changeFormFieldsValidation(form)</a></dt>
-<dd><p>Changes form validation</p></dd>
+<dt><a href="#changeFormFieldsValidation">changeFormFieldsValidation(form)</a> ⇒ <code>Object</code></dt>
+<dd><p>Toggles noValidate on Form</p></dd>
 <dt><a href="#changeFormValue">changeFormValue(formToChange, fieldName, value)</a> ⇒ <code>Object</code></dt>
-<dd><p>Changes FormField value in form.</p></dd>
+<dd><p>Changes FormField value.</p></dd>
 <dt><a href="#formHasChanged">formHasChanged(formToCheck)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Indicated if any value in form is different than initial value.</p></dd>
 <dt><a href="#formFieldHasChanged">formFieldHasChanged(formField)</a> ⇒ <code>boolean</code></dt>
@@ -30,7 +30,7 @@
 <a name="isFormField"></a>
 
 ## isFormField(field) ⇒ <code>boolean</code>
-<p>Indicates if param is FormField object.</p>
+<p>Indicates if passed param is FormField object.</p>
 
 **Kind**: global function  
 
@@ -67,13 +67,13 @@
 <a name="formFieldsToValues"></a>
 
 ## formFieldsToValues(form) ⇒ <code>Object</code>
-<p>Strips form with FormFields into object with values.</p>
+<p>Converts all FormFields in passed object into {[key]: value}</p>
 
 **Kind**: global function  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| form | <code>T</code> | <p>Form with FormFields.</p> |
+| form | <code>Object</code> | <p>Form.</p> |
 
 <a name="setNoValidate"></a>
 
@@ -90,8 +90,8 @@
 
 <a name="changeFormFieldsValidation"></a>
 
-## changeFormFieldsValidation(form)
-<p>Changes form validation</p>
+## changeFormFieldsValidation(form) ⇒ <code>Object</code>
+<p>Toggles noValidate on Form</p>
 
 **Kind**: global function  
 
@@ -103,7 +103,7 @@
 <a name="changeFormValue"></a>
 
 ## changeFormValue(formToChange, fieldName, value) ⇒ <code>Object</code>
-<p>Changes FormField value in form.</p>
+<p>Changes FormField value.</p>
 
 **Kind**: global function  
 

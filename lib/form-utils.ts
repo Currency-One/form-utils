@@ -7,7 +7,7 @@ import {
 } from './models'
 
 /**
- * Indicates if FormField has changed.
+ * Indicates if FormField's value or error has changed.
  * @param {FormField} ff1 - First FormField.
  * @param {FormField} ff2 - Second FormField.
  * @returns {boolean}
@@ -17,7 +17,7 @@ export function isFormFieldUpdated<T>(ff1: FormField<T>, ff2: FormField<T>): boo
 }
 
 /**
- * Indicates if param is FormField object.
+ * Indicates if passed param is FormField object.
  * @param {any} field - Field to check.
  * @returns {boolean}
  */
@@ -64,8 +64,8 @@ export function createPasswordFormField(
 }
 
 /**
- * Strips form with FormFields into object with values.
- * @param {T} form - Form with FormFields.
+ * Converts all FormFields in passed object into {[key]: value}
+ * @param {Object} form - Form.
  * @returns {Object}
  */
 export function formFieldsToValues<T extends object, U extends { [key in keyof T]: any }>(form: T): U {
@@ -95,9 +95,10 @@ export function setNoValidate<T>(key: string, field: FormField<T>, fieldsToSetVa
 }
 
 /**
- * Changes form validation
+ * Toggles noValidate on Form
  * @param {Object} form - Form with FormFields.
  * @param {any[]} fieldsToSetValidation.
+ * @returns {Object}
  */
 export function changeFormFieldsValidation<T extends object, U extends { [key in keyof T]?: any }>(
   form: T,
@@ -117,7 +118,7 @@ export function changeFormFieldsValidation<T extends object, U extends { [key in
 }
 
 /**
- * Changes FormField value in form.
+ * Changes FormField value.
  * @param {string} formToChange - Form.
  * @param {string} fieldName - Key of FormField in form.
  * @param {GenericTypeOfFormField<U>} value - Value to change
