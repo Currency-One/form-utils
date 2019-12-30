@@ -15,19 +15,26 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "all": "npm install && npm run lint && npm run test && npm run build",
+    "all": "npm install && npm run lint && npm run test && npm run build && npm run build:doc",
     "build": "npm run clean && npm run tsc",
     "tsc": "tsc",
     "lint": "tslint -p . -t codeFrame",
     "test": "jest --coverage",
     "clean": "rimraf ./dist",
     "fix": "npm run lint --fix",
-    "publish-package": "npm run all && npm version patch && npm publish --access public"
+    "publish-package": "npm run all && npm version patch && npm publish --access public",
+    "build:doc": "jsdoc2md --files ./lib/*.ts --configure ./jsdoc2md.json > ./DOCS.md"
   },
   "peerDependencies": {},
   "devDependencies": {
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/preset-typescript": "^7.7.7",
     "@types/jest": "^24.0.25",
     "jest": "^24.9.0",
+    "jsdoc-babel": "^0.5.0",
+    "jsdoc-to-markdown": "^5.0.3",
     "rimraf": "^3.0.0",
     "ts-jest": "^24.2.0",
     "tslint": "^5.20.1",

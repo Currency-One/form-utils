@@ -6,30 +6,68 @@ import {
   PwdField,
 } from './models'
 
-export const isFormField = (field: any): boolean => field && typeof field.validators !== 'undefined'
+/**
+ * Indicates if FormField has changed.
+ * @param {FormField} ff1 - First FormField.
+ * @param {FormField} ff2 - Second FormField.
+ * @returns {boolean}
+ */
+export function isFormFieldUpdated<T>(ff1: FormField<T>, ff2: FormField<T>): boolean {
+  return ff1.val !== ff2.val || ff1.err !== ff2.err
+}
 
-export const isFormFieldUpdated = <T>(ff1: FormField<T>, ff2: FormField<T>): boolean =>
-  ff1.val !== ff2.val || ff1.err !== ff2.err
+/**
+ * Indicates if param is FormField object.
+ * @param {any} field - Field to check.
+ * @returns {boolean}
+ */
+export function isFormField(field: any): boolean {
+  return field && typeof field.validators !== 'undefined'
+}
 
-export const createFormField = <T>(
+/**
+ * Creates FormField object.
+ * @param {T} val - Initial value for FormField.
+ * @param {Array<FormFieldValidatorFn<T> | FormFieldValidatorFnWithParamsObject<T>>} [validators] - Array of validators.
+ * @param {boolean} [noValidate] - If true, FormField will not be validated.
+ * @returns {FormField}
+ */
+export function createFormField<T>(
   val: T,
   validators?: Array<FormFieldValidatorFn<T> | FormFieldValidatorFnWithParamsObject<T>>,
   noValidate?: boolean,
-): FormField<T> => ({
-  val,
-  initialVal: val,
-  err: '',
-  validators: validators || [],
-  noValidate: noValidate || false,
-  touched: false,
-})
+): FormField<T> {
+  return {
+    val,
+    initialVal: val,
+    err: '',
+    validators: validators || [],
+    noValidate: noValidate || false,
+    touched: false,
+  }
+}
 
-export const createPasswordFormField = (
+/**
+ * Creates PwdField object.
+ * @param {string} val - Initial value for PwdField.
+ * @param {Array<FormFieldValidatorFn<string> | FormFieldValidatorFnWithParamsObject<string>>} [validators] - Array
+ * of validators.
+ * @param {boolean} [noValidate] - If true, FormField will not be validated.
+ * @returns {PwdField}
+ */
+export function createPasswordFormField(
   val: string,
   validators?: Array<FormFieldValidatorFn<string> | FormFieldValidatorFnWithParamsObject<string>>,
   noValidate?: boolean,
-): PwdField => ({ ...createFormField(val, validators, noValidate), peek: false })
+): PwdField {
+  return { ...createFormField(val, validators, noValidate), peek: false }
+}
 
+/**
+ * Strips form with FormFields into object with values.
+ * @param {T} form - Form with FormFields.
+ * @returns {Object}
+ */
 export function formFieldsToValues<T extends object, U extends { [key in keyof T]: any }>(form: T): U {
   return Object.keys(form).reduce((prev, key) => {
     const field = form[key]
@@ -38,17 +76,29 @@ export function formFieldsToValues<T extends object, U extends { [key in keyof T
     }
     return isFormField(field)
       ? // tslint:disable-next-line prefer-object-spread
-        Object.assign({}, prev, { [key]: field.val })
+      Object.assign({}, prev, { [key]: field.val })
       : // tslint:disable-next-line prefer-object-spread
-        Object.assign({}, prev, { [key]: formFieldsToValues(field) })
+      Object.assign({}, prev, { [key]: formFieldsToValues(field) })
   }, {}) as U
 }
 
+/**
+ * Toggles noValidate on FormField.
+ * @param {string} key - Key of FormField.
+ * @param {FormField} field - FormField.
+ * @param {any[]} fieldsToSetValidation.
+ * @returns {FormField}
+ */
 export function setNoValidate<T>(key: string, field: FormField<T>, fieldsToSetValidation) {
   const shouldValidate = fieldsToSetValidation[key]
   return { ...field, ...(typeof shouldValidate !== 'undefined' && { noValidate: !shouldValidate }) }
 }
 
+/**
+ * Changes form validation
+ * @param {Object} form - Form with FormFields.
+ * @param {any[]} fieldsToSetValidation.
+ */
 export function changeFormFieldsValidation<T extends object, U extends { [key in keyof T]?: any }>(
   form: T,
   fieldsToSetValidation: U,
@@ -60,12 +110,19 @@ export function changeFormFieldsValidation<T extends object, U extends { [key in
     }
     return isFormField(field)
       ? // tslint:disable-next-line prefer-object-spread
-        Object.assign({}, prev, { [key]: setNoValidate(key, field, fieldsToSetValidation) })
+      Object.assign({}, prev, { [key]: setNoValidate(key, field, fieldsToSetValidation) })
       : // tslint:disable-next-line prefer-object-spread
-        Object.assign({}, prev, { [key]: changeFormFieldsValidation(field, fieldsToSetValidation[key] || {}) })
+      Object.assign({}, prev, { [key]: changeFormFieldsValidation(field, fieldsToSetValidation[key] || {}) })
   }, form)
 }
 
+/**
+ * Changes FormField value in form.
+ * @param {string} formToChange - Form.
+ * @param {string} fieldName - Key of FormField in form.
+ * @param {GenericTypeOfFormField<U>} value - Value to change
+ * @returns {Object}
+ */
 export function changeFormValue<T, A extends keyof T, U extends T[A]>(
   formToChange: T,
   fieldName: A | string,
@@ -80,12 +137,17 @@ export function changeFormValue<T, A extends keyof T, U extends T[A]>(
     }
     return isFormField(field)
       ? // tslint:disable-next-line prefer-object-spread
-        Object.assign({}, prev, { [key]: { ...prev[key], val: value, err: '' } })
+      Object.assign({}, prev, { [key]: { ...prev[key], val: value, err: '' } })
       : // tslint:disable-next-line prefer-object-spread
-        Object.assign({}, prev, { [key]: changeFormValue(field, fieldNameArr.join('.'), value) })
+      Object.assign({}, prev, { [key]: changeFormValue(field, fieldNameArr.join('.'), value) })
   }, formToChange)
 }
 
+/**
+ * Indicated if any value in form is different than initial value.
+ * @param {Object} formToCheck - Form.
+ * @returns {boolean}
+ */
 export function formHasChanged(formToCheck): boolean {
   return Object.keys(formToCheck).some((key) => {
     const field = formToCheck[key]
@@ -96,10 +158,20 @@ export function formHasChanged(formToCheck): boolean {
   })
 }
 
+/**
+ * Indicated if FormField value is different than initial value.
+ * @param {FormField} formField - FormField.
+ * @returns {boolean}
+ */
 export function formFieldHasChanged(formField: FormField<any>): boolean {
   return formField.val !== formField.initialVal
 }
 
+/**
+ * Indicated if form has error.
+ * @param {Object} formToCheck - Form.
+ * @returns {boolean}
+ */
 export function formHasError(formToCheck): boolean {
   return Object.keys(formToCheck).some((key) => {
     const field = formToCheck[key]
@@ -110,6 +182,11 @@ export function formHasError(formToCheck): boolean {
   })
 }
 
+/**
+ * Validates FormFields in form.
+ * @param {Object} formToValidate - Form.
+ * @returns {Object}
+ */
 export function validateForm<T extends object>(formToValidate: T): T {
   return Object.keys(formToValidate).reduce((prev: T, key) => {
     const field = formToValidate[key]
@@ -124,6 +201,11 @@ export function validateForm<T extends object>(formToValidate: T): T {
   }, formToValidate)
 }
 
+/**
+ * Validates FormField.
+ * @param {FormField} formField - FormField.
+ * @returns {FormField}
+ */
 export function validateFormField<T>(formField: FormField<T>): FormField<T> {
   const err = formField.noValidate
     ? ''
