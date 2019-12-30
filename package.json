@@ -21,6 +21,7 @@
     "lint": "tslint -p . -t codeFrame",
     "test": "jest --coverage",
     "clean": "rimraf ./dist",
+    "fix": "npm run lint --fix",
     "publish-package": "npm run all && npm version patch && npm publish --access public"
   },
   "peerDependencies": {},
