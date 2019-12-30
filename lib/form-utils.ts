@@ -86,7 +86,7 @@ export function formFieldsToValues<T extends object, U extends { [key in keyof T
  * Toggles noValidate on FormField.
  * @param {string} key - Key of FormField.
  * @param {FormField} field - FormField.
- * @param {any[]} fieldsToSetValidation.
+ * @param {Object} fieldsToSetValidation.
  * @returns {FormField}
  */
 export function setNoValidate<T>(key: string, field: FormField<T>, fieldsToSetValidation) {
@@ -97,7 +97,7 @@ export function setNoValidate<T>(key: string, field: FormField<T>, fieldsToSetVa
 /**
  * Toggles noValidate on Form
  * @param {Object} form - Form with FormFields.
- * @param {any[]} fieldsToSetValidation.
+ * @param {Object} fieldsToSetValidation.
  * @returns {Object}
  */
 export function changeFormFieldsValidation<T extends object, U extends { [key in keyof T]?: any }>(

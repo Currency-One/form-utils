@@ -86,7 +86,7 @@
 | --- | --- | --- |
 | key | <code>string</code> | <p>Key of FormField.</p> |
 | field | <code>FormField</code> | <p>FormField.</p> |
-| fieldsToSetValidation. | <code>Array.&lt;any&gt;</code> |  |
+| fieldsToSetValidation. | <code>Object</code> |  |
 
 <a name="changeFormFieldsValidation"></a>
 
@@ -98,7 +98,7 @@
 | Param | Type | Description |
 | --- | --- | --- |
 | form | <code>Object</code> | <p>Form with FormFields.</p> |
-| fieldsToSetValidation. | <code>Array.&lt;any&gt;</code> |  |
+| fieldsToSetValidation. | <code>Object</code> |  |
 
 <a name="changeFormValue"></a>
 
