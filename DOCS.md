@@ -25,6 +25,8 @@
 <dd><p>Validates FormFields in form.</p></dd>
 <dt><a href="#validateFormField">validateFormField(formField)</a> ⇒ <code>FormField</code></dt>
 <dd><p>Validates FormField.</p></dd>
+<dt><a href="#validateOneFormField">validateOneFormField(formToValidate, fieldName)</a> ⇒ <code>Object</code></dt>
+<dd><p>Validates one specified FormField in form.</p></dd>
 </dl>
 
 <a name="isFormField"></a>
@@ -167,4 +169,16 @@
 | Param | Type | Description |
 | --- | --- | --- |
 | formField | <code>FormField</code> | <p>FormField.</p> |
+
+<a name="validateOneFormField"></a>
+
+## validateOneFormField(formToValidate, fieldName) ⇒ <code>Object</code>
+<p>Validates one specified FormField in form.</p>
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| formToValidate | <code>Object</code> | <p>Form.</p> |
+| fieldName | <code>string</code> | <p>Key of FormField to validate.</p> |
 

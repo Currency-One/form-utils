@@ -220,3 +220,18 @@ export function validateFormField<T>(formField: FormField<T>): FormField<T> {
     }, '')
   return { ...formField, err }
 }
+
+/**
+ * Validates one specified FormField in form.
+ * @param {Object} formToValidate - Form.
+ * @param {string} fieldName - Key of FormField to validate.
+ * @returns {Object}
+ */
+export function validateOneFormField<T extends object, U extends keyof T>(formToValidate: T, fieldName: U): T {
+  const field = formToValidate[fieldName] as any
+  if (typeof field !== 'object') {
+    return formToValidate
+  }
+  // tslint:disable-next-line prefer-object-spread
+  return Object.assign({}, formToValidate, { [fieldName]: validateFormField(field) })
+}
