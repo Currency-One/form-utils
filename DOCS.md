@@ -1,6 +1,8 @@
 ## Functions
 
 <dl>
+<dt><a href="#isFormFieldUpdated">isFormFieldUpdated(ff1, ff2)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Indicates if FormField's value or error has changed.</p></dd>
 <dt><a href="#isFormField">isFormField(field)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Indicates if passed param is FormField object.</p></dd>
 <dt><a href="#createFormField">createFormField(val, [validators], [noValidate])</a> ⇒ <code>FormField</code></dt>
@@ -28,6 +30,18 @@
 <dt><a href="#validateOneFormField">validateOneFormField(formToValidate, fieldName)</a> ⇒ <code>Object</code></dt>
 <dd><p>Validates one specified FormField in form.</p></dd>
 </dl>
+
+<a name="isFormFieldUpdated"></a>
+
+## isFormFieldUpdated(ff1, ff2) ⇒ <code>boolean</code>
+<p>Indicates if FormField's value or error has changed.</p>
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ff1 | <code>FormField</code> | <p>First FormField.</p> |
+| ff2 | <code>FormField</code> | <p>Second FormField.</p> |
 
 <a name="isFormField"></a>
 

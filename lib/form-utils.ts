@@ -34,7 +34,7 @@ export function isFormField(field: any): boolean {
  */
 export function createFormField<T>(
   val: T,
-  validators?: Array<FormFieldValidatorFn<T> | FormFieldValidatorFnWithParamsObject<T>>,
+  validators?: (FormFieldValidatorFn<T> | FormFieldValidatorFnWithParamsObject<T>)[],
   noValidate?: boolean,
 ): FormField<T> {
   return {
@@ -57,7 +57,7 @@ export function createFormField<T>(
  */
 export function createPasswordFormField(
   val: string,
-  validators?: Array<FormFieldValidatorFn<string> | FormFieldValidatorFnWithParamsObject<string>>,
+  validators?: (FormFieldValidatorFn<string> | FormFieldValidatorFnWithParamsObject<string>)[],
   noValidate?: boolean,
 ): PwdField {
   return { ...createFormField(val, validators, noValidate), peek: false }
