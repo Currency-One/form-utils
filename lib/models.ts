@@ -11,7 +11,7 @@ export interface FormField<T> {
   val: T
   initialVal: T
   err: string
-  validators: Array<FormFieldValidatorFn<T> | FormFieldValidatorFnWithParamsObject<T>>
+  validators: (FormFieldValidatorFn<T> | FormFieldValidatorFnWithParamsObject<T>)[]
   noValidate?: boolean
   touched: boolean
 }
