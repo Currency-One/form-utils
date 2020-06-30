@@ -84,10 +84,14 @@ describe('form-utils', () => {
       },
     }
 
+    expect(form.field1.touched).toBeFalsy()
+
     let formUpdated = changeFormValue(form, 'field1', 'EUR')
     expect(formUpdated.field1.val).toEqual('EUR')
+    expect(formUpdated.field1.touched).toBeTruthy()
 
     formUpdated = changeFormValue(form, 'field4.subfield1', 'changedText')
     expect(formUpdated.field4.subfield1.val).toEqual('changedText')
+    expect(formUpdated.field4.subfield1.touched).toBeTruthy()
   })
 })
