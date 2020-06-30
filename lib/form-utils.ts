@@ -138,7 +138,7 @@ export function changeFormValue<T, A extends keyof T, U extends T[A]>(
     }
     return isFormField(field)
       ? // tslint:disable-next-line prefer-object-spread
-      Object.assign({}, prev, { [key]: { ...prev[key], val: value, err: '' } })
+      Object.assign({}, prev, { [key]: { ...prev[key], val: value, err: '', touched: true } })
       : // tslint:disable-next-line prefer-object-spread
       Object.assign({}, prev, { [key]: changeFormValue(field, fieldNameArr.join('.'), value) })
   }, formToChange)
