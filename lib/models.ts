@@ -28,4 +28,6 @@ export type GenericTypeOfFormField<T> = T extends FormField<string>
       ? number
       : T extends FormField<boolean>
         ? boolean
-        : object
+        : T extends FormField<boolean | undefined>
+          ? boolean | undefined
+          : object
