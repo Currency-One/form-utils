@@ -82,6 +82,7 @@ describe('form-utils', () => {
         subfield1: createFormField('', []),
         subfield2: createFormField('text', []),
       },
+      field5: createFormField<boolean | undefined>(undefined, []),
     }
 
     expect(form.field1.touched).toBeFalsy()
@@ -93,5 +94,9 @@ describe('form-utils', () => {
     formUpdated = changeFormValue(form, 'field4.subfield1', 'changedText')
     expect(formUpdated.field4.subfield1.val).toEqual('changedText')
     expect(formUpdated.field4.subfield1.touched).toBeTruthy()
+
+    formUpdated = changeFormValue(form, 'field5', true)
+    expect(formUpdated.field5.val).toBeTruthy()
+    expect(formUpdated.field5.touched).toBeTruthy()
   })
 })
