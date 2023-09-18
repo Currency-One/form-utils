@@ -7,6 +7,26 @@ import {
 } from './models'
 
 /**
+ * Indicates if passed value is Form object.
+ * @param {any} value - Value to check.
+ * @returns {boolean}
+ */
+export function isForm(value: any): boolean {
+  if (!value || typeof value !== 'object') {
+    return false
+  }
+
+  const keys = Object.keys(value)
+  return (
+      !!keys.length &&
+      keys.every((key) => {
+        const field = value[key]
+        return isFormField(field) || (typeof field === 'object' && isForm(field))
+      })
+  )
+}
+
+/**
  * Indicates if FormField's value or error has changed.
  * @param {FormField} ff1 - First FormField.
  * @param {FormField} ff2 - Second FormField.
@@ -22,7 +42,7 @@ export function isFormFieldUpdated<T>(ff1: FormField<T>, ff2: FormField<T>): boo
  * @returns {boolean}
  */
 export function isFormField(field: any): boolean {
-  return field && typeof field.validators !== 'undefined'
+  return !!field && typeof field.validators !== 'undefined'
 }
 
 /**

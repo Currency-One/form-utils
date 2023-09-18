@@ -7,6 +7,10 @@ export interface FormFieldValidatorFnWithParamsObject<T> {
   params: () => any
 }
 
+export interface Form {
+  [key: string]: FormField<any> | Form
+}
+
 export interface FormField<T> {
   val: T
   initialVal: T
