@@ -3,21 +3,40 @@ import {
   changeFormValue,
   createFormField,
   createPasswordFormField,
-  formFieldsToValues,
+  formFieldsToValues, isForm,
   isFormField,
 } from '../lib/form-utils'
 
 describe('form-utils', () => {
+  it('should isForm() return correct value', () => {
+    const formField = createFormField('')
+
+    expect(isForm(null)).toBe(false)
+    expect(isForm(undefined)).toBe(false)
+    expect(isForm('')).toBe(false)
+    expect(isForm('string')).toBe(false)
+    expect(isForm(['string'])).toBe(false)
+    expect(isForm({})).toBe(false)
+    expect(isForm({ field1: formField, field2: 'string' })).toBe(false)
+    expect(isForm({ field1: formField, field2: null })).toBe(false)
+    expect(isForm({ field1: formField, field2: null, field3: formField })).toBe(false)
+    expect(isForm({ field1: formField, field2: { subfield1: formField, subfield2: 'string' } })).toBe(false)
+    expect(isForm({ field1: formField, field2: { subfield1: formField, subfield2: { subfield1: 'string' } } })).toBe(false)
+    expect(isForm({ field1: formField })).toBe(true)
+    expect(isForm({ field1: formField, field2: formField })).toBe(true)
+    expect(isForm({ field1: formField, field2: { subfield1: formField, subfield2: { subfield1: formField } } })).toBe(true)
+  })
+
   it('should isFormField() return correct value', () => {
     const formField = createFormField('')
 
-    expect(isFormField(null)).toBeFalsy()
-    expect(isFormField(undefined)).toBeFalsy()
-    expect(isFormField('')).toBeFalsy()
-    expect(isFormField('string')).toBeFalsy()
-    expect(isFormField(['string'])).toBeFalsy()
-    expect(isFormField({})).toBeFalsy()
-    expect(isFormField(formField)).toBeTruthy()
+    expect(isFormField(null)).toBe(false)
+    expect(isFormField(undefined)).toBe(false)
+    expect(isFormField('')).toBe(false)
+    expect(isFormField('string')).toBe(false)
+    expect(isFormField(['string'])).toBe(false)
+    expect(isFormField({})).toBe(false)
+    expect(isFormField(formField)).toBe(true)
   })
 
   it('should formFieldsToValues() transform form to object without form fields', () => {
