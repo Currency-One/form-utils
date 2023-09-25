@@ -38,10 +38,10 @@
 ## isForm(value) ⇒ <code>boolean</code>
 <p>Indicates if passed value is Form object.</p>
 
-**Kind**: global function
+**Kind**: global function  
 
-| Param  | Type | Description            |
-|--------| --- |------------------------|
+| Param | Type | Description |
+| --- | --- | --- |
 | value | <code>any</code> | <p>Value to check.</p> |
 
 <a name="isFormFieldUpdated"></a>
