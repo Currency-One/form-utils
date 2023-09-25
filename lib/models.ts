@@ -8,7 +8,7 @@ export interface FormFieldValidatorFnWithParamsObject<T> {
 }
 
 export interface Form {
-  [key: string]: FormField<any> | Form
+  [key: string]: FormField<any> | Form | undefined
 }
 
 export interface FormField<T> {
