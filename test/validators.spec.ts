@@ -1,4 +1,4 @@
-import { createFormField, formHasError, validateForm, validateOneFormField } from '../lib'
+import { clearOneFormFieldValidation, createFormField, formHasError, validateForm, validateOneFormField } from '../lib'
 
 describe('validators', () => {
   const getSampleForm = () => ({
@@ -66,5 +66,20 @@ describe('validators', () => {
     expect(validate.field6).toEqual(form.field6)
     expect(validate.field7.err).toHaveLength(0)
     expect(validate.field8.err).toHaveLength(0)
+  })
+
+  it('should clearOneFormFieldValidation() correctly', () => {
+    const validatedForm = validateForm(getSampleForm())
+    const clearedField = (field: keyof typeof validatedForm) => clearOneFormFieldValidation(validatedForm, field)
+
+    expect(typeof clearedField('field1')).toEqual(typeof validatedForm)
+    expect(validatedForm.field1.err).toHaveLength(0)
+    expect(clearedField('field1').field1.err).toHaveLength(0)
+    expect(validatedForm.field3.err).not.toHaveLength(0)
+    expect(clearedField('field3').field3.err).toHaveLength(0)
+    expect(validatedForm.field7.err).not.toHaveLength(0)
+    expect(clearedField('field7').field7.err).toHaveLength(0)
+    expect(validatedForm.field8.err).toHaveLength(0)
+    expect(clearedField('field8').field8.err).toHaveLength(0)
   })
 })

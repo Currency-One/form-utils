@@ -255,3 +255,18 @@ export function validateOneFormField<T extends object, U extends keyof T>(formTo
   // tslint:disable-next-line prefer-object-spread
   return Object.assign({}, formToValidate, { [fieldName]: validateFormField(field) })
 }
+
+export function clearOneFormFieldValidation<T extends object, U extends keyof T>(formToValidate: T, fieldName: U): T {
+  const field = formToValidate[fieldName] as any
+  if (typeof field !== 'object') {
+    return formToValidate
+  }
+  // tslint:disable-next-line prefer-object-spread
+  return Object.assign({}, formToValidate, {
+    [fieldName]: {
+      ...field,
+      err: '',
+      touched: true,
+    },
+  })
+}
