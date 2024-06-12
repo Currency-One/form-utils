@@ -149,7 +149,7 @@ export function changeFormValue<T, A extends keyof T, U extends T[A]>(
   fieldName: A | string,
   value: GenericTypeOfFormField<U>,
 ): T {
-  const fieldNameArr: string[] = typeof fieldName === 'string' ? fieldName.split('.') : [fieldName as string]
+  const fieldNameArr: string[] = typeof fieldName === 'string' ? fieldName.split('.') : [fieldName as unknown as string]
   const firstKey = fieldNameArr.shift()
   return Object.keys(formToChange).reduce((prev: T, key) => {
     const field = formToChange[key]
