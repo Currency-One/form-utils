@@ -5,6 +5,8 @@
 <dd><p>Indicates if passed value is Form object.</p></dd>
 <dt><a href="#isFormFieldUpdated">isFormFieldUpdated(ff1, ff2)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Indicates if FormField's value or error has changed.</p></dd>
+<dt><a href="#isFormFieldValueUpdated">isFormFieldValueUpdated(ff1, ff2)</a> ⇒ <code>boolean</code></dt>
+<dd><p>Indicates if FormField's value has changed.</p></dd>
 <dt><a href="#isFormField">isFormField(field)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Indicates if passed param is FormField object.</p></dd>
 <dt><a href="#createFormField">createFormField(val, [validators], [noValidate])</a> ⇒ <code>FormField</code></dt>
@@ -48,6 +50,18 @@
 
 ## isFormFieldUpdated(ff1, ff2) ⇒ <code>boolean</code>
 <p>Indicates if FormField's value or error has changed.</p>
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| ff1 | <code>FormField</code> | <p>First FormField.</p> |
+| ff2 | <code>FormField</code> | <p>Second FormField.</p> |
+
+<a name="isFormFieldValueUpdated"></a>
+
+## isFormFieldValueUpdated(ff1, ff2) ⇒ <code>boolean</code>
+<p>Indicates if FormField's value has changed.</p>
 
 **Kind**: global function  
 

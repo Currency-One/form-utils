@@ -4,7 +4,7 @@ import {
   createFormField,
   createPasswordFormField,
   formFieldsToValues, isForm,
-  isFormField,
+  isFormField, isFormFieldValueUpdated,
 } from '../lib/form-utils'
 
 describe('form-utils', () => {
@@ -117,5 +117,31 @@ describe('form-utils', () => {
     formUpdated = changeFormValue(form, 'field5', true)
     expect(formUpdated.field5.val).toBeTruthy()
     expect(formUpdated.field5.touched).toBeTruthy()
+  })
+
+  it('should isFormFieldValueUpdated() return correct value', () => {
+    const formField1 = createFormField('')
+    const formField2 = createFormField('test')
+    const formField3 = createFormField(false)
+    const formField4 = createFormField(true)
+    const formField5 = createFormField(0)
+    const formField6 = createFormField(1)
+    const formField7 = createFormField({test: ''})
+    const formField8 = createFormField({test: 'test'})
+    const formField9 = createFormField('errorTest')
+    const formField10 = createFormField('errorTest')
+    formField10.err = 'error'
+
+    expect(isFormFieldValueUpdated(formField1, formField1)).toBe(false)
+    expect(isFormFieldValueUpdated(formField3, formField3)).toBe(false)
+    expect(isFormFieldValueUpdated(formField5, formField5)).toBe(false)
+    expect(isFormFieldValueUpdated(formField7, formField7)).toBe(false)
+
+    expect(isFormFieldValueUpdated(formField1, formField2)).toBe(true)
+    expect(isFormFieldValueUpdated(formField3, formField4)).toBe(true)
+    expect(isFormFieldValueUpdated(formField5, formField6)).toBe(true)
+    expect(isFormFieldValueUpdated(formField7, formField8)).toBe(true)
+
+    expect(isFormFieldValueUpdated(formField9, formField10)).toBe(false)
   })
 })
