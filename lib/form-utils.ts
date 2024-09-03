@@ -37,6 +37,16 @@ export function isFormFieldUpdated<T>(ff1: FormField<T>, ff2: FormField<T>): boo
 }
 
 /**
+ * Indicates if FormField's value has changed.
+ * @param {FormField} ff1 - First FormField.
+ * @param {FormField} ff2 - Second FormField.
+ * @returns {boolean}
+ */
+export function isFormFieldValueUpdated<T>(ff1: FormField<T>, ff2: FormField<T>): boolean {
+  return ff1.val !== ff2.val
+}
+
+/**
  * Indicates if passed param is FormField object.
  * @param {any} field - Field to check.
  * @returns {boolean}
