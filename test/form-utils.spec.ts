@@ -1,6 +1,6 @@
 import {
   changeFormFieldsValidation,
-  changeFormValue,
+  changeFormValue, changeFormValues,
   createFormField,
   createPasswordFormField,
   formFieldsToValues, isForm,
@@ -115,6 +115,35 @@ describe('form-utils', () => {
     expect(formUpdated.field4.subfield1.touched).toBeTruthy()
 
     formUpdated = changeFormValue(form, 'field5', true)
+    expect(formUpdated.field5.val).toBeTruthy()
+    expect(formUpdated.field5.touched).toBeTruthy()
+  })
+
+  it('should changeFormValues() change many values in form', () => {
+    const form = {
+      field1: createFormField('PLN', []),
+      field2: createFormField('', []),
+      field3: 'string',
+      field4: {
+        subfield1: createFormField('', []),
+        subfield2: createFormField('text', []),
+      },
+      field5: createFormField<boolean | undefined>(undefined, []),
+    }
+
+    expect(form.field1.touched).toBeFalsy()
+
+    const formUpdated = changeFormValues(form, {
+      field1: 'EUR',
+      field4: {
+        subfield1: 'changedText',
+      },
+      field5: true,
+    })
+    expect(formUpdated.field1.val).toEqual('EUR')
+    expect(formUpdated.field1.touched).toBeTruthy()
+    expect(formUpdated.field4.subfield1.val).toEqual('changedText')
+    expect(formUpdated.field4.subfield1.touched).toBeTruthy()
     expect(formUpdated.field5.val).toBeTruthy()
     expect(formUpdated.field5.touched).toBeTruthy()
   })

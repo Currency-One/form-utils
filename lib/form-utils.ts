@@ -175,6 +175,29 @@ export function changeFormValue<T, A extends keyof T, U extends T[A]>(
 }
 
 /**
+ * Changes few FormField values at once.
+ * @param {string} formToChange - Form.
+ * @param {Object} fieldsToChange.
+ * @returns {Object}
+ */
+export function changeFormValues<T, U extends { [key in keyof T]?: any }>(
+  formToChange: T,
+  fieldsToChange: U,
+): T {
+  return Object.keys(fieldsToChange).reduce((prev: T, key) => {
+    const field = formToChange[key]
+    if (typeof field !== 'object') {
+      return prev
+    }
+
+    return isFormField(field)
+      ? changeFormValue(prev, key, fieldsToChange[key])
+      : // tslint:disable-next-line prefer-object-spread
+      Object.assign({}, prev, { [key]: changeFormValues(field, fieldsToChange[key]) })
+  }, formToChange)
+}
+
+/**
  * Indicated if any value in form is different than initial value.
  * @param {Object} formToCheck - Form.
  * @returns {boolean}
