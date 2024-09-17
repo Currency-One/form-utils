@@ -21,6 +21,8 @@
 <dd><p>Toggles noValidate on Form</p></dd>
 <dt><a href="#changeFormValue">changeFormValue(formToChange, fieldName, value)</a> ⇒ <code>Object</code></dt>
 <dd><p>Changes FormField value.</p></dd>
+<dt><a href="#changeFormValues">changeFormValues(formToChange)</a> ⇒ <code>Object</code></dt>
+<dd><p>Changes few FormField values at once.</p></dd>
 <dt><a href="#formHasChanged">formHasChanged(formToCheck)</a> ⇒ <code>boolean</code></dt>
 <dd><p>Indicated if any value in form is different than initial value.</p></dd>
 <dt><a href="#formFieldHasChanged">formFieldHasChanged(formField)</a> ⇒ <code>boolean</code></dt>
@@ -155,6 +157,18 @@
 | formToChange | <code>string</code> | <p>Form.</p> |
 | fieldName | <code>string</code> | <p>Key of FormField in form.</p> |
 | value | <code>GenericTypeOfFormField.&lt;U&gt;</code> | <p>Value to change</p> |
+
+<a name="changeFormValues"></a>
+
+## changeFormValues(formToChange) ⇒ <code>Object</code>
+<p>Changes few FormField values at once.</p>
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| formToChange | <code>string</code> | <p>Form.</p> |
+| fieldsToChange. | <code>Object</code> |  |
 
 <a name="formHasChanged"></a>
 
